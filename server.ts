@@ -1,8 +1,10 @@
 import express from 'express';
 import users from './data/users';
+import loggingMiddleware from './middleware/logging';
 
 const app = express();
 app.use(express.json());
+app.use(loggingMiddleware);
 
 app.get('/', (req, res) => {
     res.send('Hello, World!');
