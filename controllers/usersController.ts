@@ -93,10 +93,7 @@ export const deleteUser = (req: Request, res: Response) => {
     const success = remove(userId);
 
     if (success) {
-        res.status(204).json({
-            success: 'true',
-            message: 'Utilisateur supprimé avec succès',
-        });
+        res.status(204).send();
     } else {
         res.status(404).json({
             success: 'false',
