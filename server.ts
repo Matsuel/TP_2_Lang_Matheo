@@ -9,10 +9,17 @@ app.get('/', (req, res) => {
 });
 
 app.get('/api/users', (req, res) => {
+    const { role } = req.query;
+    let filteredUsers = users;
+
+    if (role) {
+        filteredUsers = users.filter(user => user.role === role);
+    }
+
     const response = {
         success: 'true',
-        count: users.length,
-        data: users,
+        count: filteredUsers.length,
+        data: filteredUsers,
     };
     res.status(200).json(response);
 });
@@ -40,6 +47,14 @@ app.post('/api/users', (req, res) => {
         return res.status(400).json({
             success: 'false',
             message: 'Le nom et l\'email sont requis pour créer un utilisateur',
+        });
+    }
+
+    const existingUser = users.find(u => u.email === email);
+    if (existingUser) {
+        return res.status(409).json({
+            success: 'false',
+            message: 'Un utilisateur avec cet email existe déjà',
         });
     }
 
