@@ -1,11 +1,13 @@
 import express from 'express';
 import loggingMiddleware from './middleware/logging';
 import userRouter from './routes/users';
+import defaultRouter from './routes/default';
 
 const app = express();
 app.use(express.json());
 app.use(loggingMiddleware);
 
+app.use(defaultRouter);
 app.use('/api/users', userRouter);
 
 const PORT = process.env.PORT || 3001;

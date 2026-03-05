@@ -59,6 +59,46 @@ Le serveur écoute sur **http://localhost:3001**.
 
 ## Documentation des routes
 
+### Tableau récapitulatif
+
+| Verbe HTTP | Route | Description | Statuts possibles |
+|---|---|---|---|
+| GET | `/` | Page d'accueil | 200 |
+| GET | `/barrel-roll` | Redirection Google "do a barrel roll" | 302 |
+| GET | `/api/users` | Lister tous les utilisateurs (filtre `?role=`) | 200 |
+| GET | `/api/users/:id` | Obtenir un utilisateur par son id | 200, 404 |
+| POST | `/api/users` | Créer un nouvel utilisateur | 201, 400, 409 |
+| PUT | `/api/users/:id` | Mettre à jour un utilisateur (partiel) | 200, 400, 404 |
+| DELETE | `/api/users/:id` | Supprimer un utilisateur | 204, 404 |
+
+---
+
+### GET `/`
+
+Retourne un message de bienvenue.
+
+**Exemple :**
+```
+GET http://localhost:3001/
+```
+
+**Réponse 200 :** `Hello, World!`
+
+---
+
+### GET `/barrel-roll`
+
+Redirige vers la recherche Google "do a barrel roll".
+
+**Exemple :**
+```
+GET http://localhost:3001/barrel-roll
+```
+
+**Réponse 302 :** redirection vers `https://www.google.com/search?q=do+a+barrel+roll`
+
+---
+
 ### GET `/api/users`
 
 Retourne la liste complète des utilisateurs.  
