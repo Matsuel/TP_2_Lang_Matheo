@@ -6,7 +6,7 @@ export const getAllUsers = (req: Request, res: Response) => {
     const users = getAll(typeof role === 'string' ? role : undefined);
 
     const response = {
-        success: 'true',
+        success: true,
         count: users.length,
         data: users,
     };
@@ -19,12 +19,12 @@ export const getUserById = (req: Request, res: Response) => {
 
     if (user) {
         res.status(200).json({
-            success: 'true',
+            success: true,
             data: user,
         });
     } else {
         res.status(404).json({
-            success: 'false',
+            success: false,
             message: 'Utilisateur non trouvé',
         });
     }
@@ -34,7 +34,7 @@ export const createUser = (req: Request, res: Response) => {
     const { name, email } = req.body;
     if (!name || !email) {
         return res.status(400).json({
-            success: 'false',
+            success: false,
             message: 'Le nom et l\'email sont requis pour créer un utilisateur',
         });
     }
@@ -42,14 +42,14 @@ export const createUser = (req: Request, res: Response) => {
     const existingUser = getAll().find(u => u.email === email);
     if (existingUser) {
         return res.status(409).json({
-            success: 'false',
+            success: false,
             message: 'Un utilisateur avec cet email existe déjà',
         });
     }
 
     const newUser = create({ name, email });
     res.status(201).json({
-        success: 'true',
+        success: true,
         data: newUser,
     });
 }
@@ -59,7 +59,7 @@ export const updateUser = (req: Request, res: Response) => {
     const userIndex = getById(userId);
     if (!userIndex) {
         return res.status(404).json({
-            success: 'false',
+            success: false,
             message: 'Utilisateur non trouvé',
         });
     }
@@ -68,7 +68,7 @@ export const updateUser = (req: Request, res: Response) => {
 
     if (Object.keys(allowedUpdates).length === 0) {
         return res.status(400).json({
-            success: 'false',
+            success: false,
             message: 'Aucun champ valide fourni pour la mise à jour',
         });
     }
@@ -77,12 +77,12 @@ export const updateUser = (req: Request, res: Response) => {
 
     if (updatedUser) {
         res.status(200).json({
-            success: 'true',
+            success: true,
             data: updatedUser,
         });
     } else {
         res.status(404).json({
-            success: 'false',
+            success: false,
             message: 'Utilisateur non trouvé',
         });
     }
@@ -96,7 +96,7 @@ export const deleteUser = (req: Request, res: Response) => {
         res.status(204).send();
     } else {
         res.status(404).json({
-            success: 'false',
+            success: false,
             message: 'Utilisateur non trouvé',
         });
     }
