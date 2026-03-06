@@ -1,68 +1,35 @@
 import mongoose from "mongoose";
-import users from "../data/users";
 
 const userSchema = new mongoose.Schema({
     name: { type: String, required: true, trim: true },
     email: { type: String, required: true, unique: true, lowercase: true },
     role: { type: String, enum: ['admin', 'user'], default: 'user' },
     createdAt: { type: Date, default: Date.now }
-});
+}, { versionKey: false });
 
 const User = mongoose.model('User', userSchema);
 
 export default User;
 
-export const getAll = (role?: string) => {
-    let filteredUsers = users;
-
-    if (role) {
-        filteredUsers = users.filter(user => user.role === role);
-    }
-
-    return filteredUsers;
+export const getAll = async (role?: string) => {
+    const filter = role ? { role } : {};
+    return User.find(filter);
 }
 
-export const getById = (id: number) => {
-    return users.find(user => user.id === id);
+export const getById = async (id: string) => {
+    return User.findById(id);
 }
 
-export const create = (data: { name: string; email: string }) => {
-    const { name, email } = data;
-
-    const newUser = {
-        id: users.length + 1,
-        name,
-        email,
-        role: 'user',
-        createdAt: new Date().toISOString(),
-    };
-    users.push(newUser);
-    return newUser;
+export const create = async (data: { name: string; email: string }) => {
+    return User.create(data);
 }
 
-export const update = (id: number, data: { name?: string; email?: string, role?: string }) => {
-    const user = getById(id);
-    if (!user) {
-        return null;
-    }
-
-    if (data.name) {
-        user.name = data.name;
-    }
-    if (data.email) {
-        user.email = data.email;
-    }
-    if (data.role) {
-        user.role = data.role;
-    }
-    return user;
+export const update = async (id: string, data: { name?: string; email?: string; role?: string; _id?: unknown; createdAt?: unknown }) => {
+    const { _id, createdAt, ...safeData } = data;
+    return User.findByIdAndUpdate(id, safeData, { new: true, runValidators: true });
 }
 
-export const remove = (id: number) => {
-    const index = users.findIndex(user => user.id === id);
-    if (index === -1) {
-        return false;
-    }
-    users.splice(index, 1);
-    return true;
+export const remove = async (id: string) => {
+    const result = await User.findByIdAndDelete(id);
+    return result !== null;
 };

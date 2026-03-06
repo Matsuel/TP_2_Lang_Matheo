@@ -4,10 +4,10 @@ import { createUser, deleteUser, getAllUsers, getUserById, updateUser } from "..
 const userRouter = Router();
 
 userRouter.get('/', getAllUsers);
-userRouter.get('/:id', getUserById);
+userRouter.get('/:_id', getUserById);
 userRouter.post('/', createUser);
-userRouter.put('/:id', updateUser);
-userRouter.delete('/:id', deleteUser);
+userRouter.put('/:_id', updateUser);
+userRouter.delete('/:_id', deleteUser);
 
 
 export default userRouter;
