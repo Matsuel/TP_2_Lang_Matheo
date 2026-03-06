@@ -35,45 +35,47 @@ const UserForm = ({ onSubmit }: UserFormProps) => {
 
     return (
         <form className="user-form" onSubmit={handleSubmit}>
-            <h2 className="user-form__title">Nouvel utilisateur</h2>
+            <h2 className="user-form__title">Ajouter un utilisateur</h2>
 
             {validationError && (
                 <p className="user-form__error">{validationError}</p>
             )}
 
-            <div className="user-form__field">
-                <label htmlFor="name">Nom</label>
-                <input
-                    id="name"
-                    name="name"
-                    type="text"
-                    value={formData.name}
-                    onChange={handleChange}
-                    placeholder="Nom complet"
-                />
-            </div>
+            <div className="user-form__fields">
+                <div className="user-form__field">
+                    <label htmlFor="name">Nom</label>
+                    <input
+                        id="name"
+                        name="name"
+                        type="text"
+                        value={formData.name}
+                        onChange={handleChange}
+                        placeholder="Nom complet"
+                    />
+                </div>
 
-            <div className="user-form__field">
-                <label htmlFor="email">Email</label>
-                <input
-                    id="email"
-                    name="email"
-                    type="email"
-                    value={formData.email}
-                    onChange={handleChange}
-                    placeholder="adresse@email.com"
-                />
-            </div>
+                <div className="user-form__field">
+                    <label htmlFor="email">Email</label>
+                    <input
+                        id="email"
+                        name="email"
+                        type="email"
+                        value={formData.email}
+                        onChange={handleChange}
+                        placeholder="adresse@email.com"
+                    />
+                </div>
 
-            <div className="user-form__field">
-                <label htmlFor="role">Rôle</label>
-                <select id="role" name="role" value={formData.role} onChange={handleChange}>
-                    <option value="user">user</option>
-                    <option value="admin">admin</option>
-                </select>
-            </div>
+                <div className="user-form__field">
+                    <label htmlFor="role">Rôle</label>
+                    <select id="role" name="role" value={formData.role} onChange={handleChange}>
+                        <option value="user">user</option>
+                        <option value="admin">admin</option>
+                    </select>
+                </div>
 
-            <button type="submit" className="user-form__submit">Créer</button>
+                <button type="submit" className="user-form__submit">Créer</button>
+            </div>
         </form>
     )
 }

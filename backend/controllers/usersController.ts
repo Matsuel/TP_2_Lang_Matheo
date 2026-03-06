@@ -30,11 +30,11 @@ export const getUserById = async (req: Request, res: Response, next: NextFunctio
 };
 
 export const createUser = async (req: Request, res: Response, next: NextFunction) => {
-    const { name, email } = req.body;
+    const { name, email, role } = req.body;
     if (!name || !email) return next(new AppError(400, 'Le nom et l\'email sont requis pour créer un utilisateur'));
 
     try {
-        const newUser = await create({ name, email });
+        const newUser = await create({ name, email, role });
         res.status(201).json({ success: true, data: newUser });
     } catch (error) {
         next(error);

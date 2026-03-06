@@ -22,7 +22,7 @@ export const getById = async (id: string) => {
     return User.findById(id);
 }
 
-export const create = async (data: { name: string; email: string }) => {
+export const create = async (data: { name: string; email: string; role?: string }) => {
     return User.create(data);
 }
 

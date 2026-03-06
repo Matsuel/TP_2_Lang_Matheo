@@ -51,10 +51,12 @@ function App() {
   }
 
   return (
-    <div>
+    <div className="app-layout">
       <Navbar count={users.length} />
-      <UserForm onSubmit={handleCreate} />
-      <UserList users={users} loading={loading} error={error} onDelete={handleDelete} />
+      <main className="app-main">
+        <UserForm onSubmit={handleCreate} />
+        <UserList users={users} loading={loading} error={error} onDelete={handleDelete} />
+      </main>
     </div>
   )
 }
