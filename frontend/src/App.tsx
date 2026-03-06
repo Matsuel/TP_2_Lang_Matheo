@@ -4,6 +4,7 @@ import Navbar from './components/Navbar'
 import UserForm from './components/UserForm'
 import UserList from './components/UserList'
 import { userService } from './services/userService'
+import axios from 'axios'
 
 interface User {
   _id: string
@@ -36,8 +37,12 @@ function App() {
     try {
       const res = await userService.create(data)
       setUsers((prev) => [...prev, res.data.data])
-    } catch {
-      setError('Erreur lors de la création de l\'utilisateur.')
+    } catch (err) {
+      if (axios.isAxiosError(err) && err.response) {
+        setError(err.response.data.message || 'Erreur lors de la création de l\'utilisateur.')
+      } else {
+        setError('Erreur lors de la création de l\'utilisateur.')
+      }
     }
   }
 
@@ -45,8 +50,12 @@ function App() {
     try {
       await userService.remove(id)
       setUsers((prev) => prev.filter((u) => u._id !== id))
-    } catch {
-      setError('Erreur lors de la suppression de l\'utilisateur.')
+    } catch (err) {
+      if (axios.isAxiosError(err) && err.response) {
+        setError(err.response.data.message || 'Erreur lors de la suppression de l\'utilisateur.')
+      } else {
+        setError('Erreur lors de la suppression de l\'utilisateur.')
+      }
     }
   }
 
