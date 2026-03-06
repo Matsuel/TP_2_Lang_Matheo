@@ -1,6 +1,7 @@
 import 'dotenv/config';
 import express from 'express';
 import loggingMiddleware from './middleware/logging';
+import errorHandler from './middleware/errorHandler';
 import userRouter from './routes/users';
 import defaultRouter from './routes/default';
 import { connectDB } from './config/db';
@@ -12,8 +13,9 @@ app.use(loggingMiddleware);
 app.use(defaultRouter);
 app.use('/api/users', userRouter);
 
-const PORT = process.env.PORT;
+app.use(errorHandler);
 
+const PORT = process.env.PORT;
 
 app.listen(PORT, async () => {
     await connectDB();
