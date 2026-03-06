@@ -11,8 +11,10 @@ const User = mongoose.model('User', userSchema);
 
 export default User;
 
-export const getAll = async (role?: string) => {
-    const filter = role ? { role } : {};
+export const getAll = async (role?: string, search?: string) => {
+    const filter: Record<string, unknown> = {};
+    if (role) filter.role = role;
+    if (search) filter.name = new RegExp(search, 'i');
     return User.find(filter);
 }
 

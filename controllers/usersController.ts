@@ -4,8 +4,11 @@ import { create, getAll, getById, remove, update } from "../models/usersModel";
 
 export const getAllUsers = async (req: Request, res: Response) => {
     try {
-        const { role } = req.query;
-        const users = await getAll(role as string | undefined);
+        const { role, search } = req.query;
+        const users = await getAll(
+            typeof role === 'string' ? role : undefined,
+            typeof search === 'string' ? search : undefined
+        );
 
         const response = {
             success: true,
