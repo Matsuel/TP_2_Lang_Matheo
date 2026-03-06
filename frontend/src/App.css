@@ -1,0 +1,13 @@
+.navbar {
+  background-color: '#2563eb';
+  color: '#ffffff';
+  padding: 1rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.navbar-title {
+  font-size: 1.25rem;
+  margin: 0;
+}
