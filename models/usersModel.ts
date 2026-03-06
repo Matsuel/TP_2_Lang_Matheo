@@ -26,7 +26,7 @@ export const create = async (data: { name: string; email: string }) => {
 
 export const update = async (id: string, data: { name?: string; email?: string; role?: string; _id?: unknown; createdAt?: unknown }) => {
     const { _id, createdAt, ...safeData } = data;
-    return User.findByIdAndUpdate(id, safeData, { new: true, runValidators: true });
+    return User.findByIdAndUpdate(id, safeData, { returnDocument: 'after', runValidators: true });
 }
 
 export const remove = async (id: string) => {
