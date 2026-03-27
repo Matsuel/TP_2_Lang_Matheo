@@ -230,15 +230,13 @@ Utilise `findByIdAndUpdate` avec `returnDocument: 'after'` et `runValidators: tr
 
 ---
 
-### 8. GET `/api/users/:_id` — ID au format invalide (400)
+### 8. POST `/api/users` — Création d'un utilisateur pour vérifier la persistance
 
-![GET /api/users/:_id - 400 ID invalide](./images/tp3/08.png)
+![POST /api/users - création pour persistance](./images/tp3/08.png)
 
 ---
 
 ### 9. Redémarrage du serveur — Persistance vérifiée
-
-Créez un utilisateur via POST, notez son `_id`, redémarrez le serveur (`Ctrl+C` puis `bun server.ts`), puis faites `GET /api/users/:_id` — l'utilisateur doit être retrouvé.
 
 ![Persistance après redémarrage - GET](./images/tp3/09.png)
 
