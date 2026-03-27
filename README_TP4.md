@@ -85,6 +85,7 @@ Carte avec avatar généré depuis les initiales, badge de rôle coloré, date f
 La liste des utilisateurs s'affiche (données persistées depuis le TP3 / MongoDB).
 
 ![Scénario 01](images/tp4/01.png)
+
 ![Scénario 01 Affichage Utilisateurs](images/tp4/TP4_Lancement%20Front.png)
 
 ---
@@ -94,6 +95,7 @@ La liste des utilisateurs s'affiche (données persistées depuis le TP3 / MongoD
 Remplir et soumettre le formulaire. Le nouvel utilisateur apparaît dans la liste immédiatement, sans rechargement de page.
 
 ![Scénario 02](images/tp4/02.png)
+
 ![Scénario 02 Création Utilisateur](images/tp4/TP4_Refresh%20création%20user.png)
 
 ---
@@ -103,6 +105,7 @@ Remplir et soumettre le formulaire. Le nouvel utilisateur apparaît dans la list
 Cliquer sur "Supprimer" dans une carte. L'utilisateur disparaît de la liste immédiatement via mise à jour du state React.
 
 ![Scénario 03](images/tp4/03.png)
+
 ![Scénario 03 Suppression Utilisateur](images/tp4/TP4_Suppression%20utilisateur.png)    
 
 ---
